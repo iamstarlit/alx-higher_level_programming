@@ -32,13 +32,12 @@ class Rectangle(object):
 
     def __str__(self):
         if self.__width == 0 or self.__height == 0:
-            return rectangle
+            return ("")
 
         rectangle = ""
 
         for symbol in range(self.__height):
-            rectangle += (Rectangle.print_symbol * self.__width) + "\n"
-
+            rectangle += (str(Rectangle.print_symbol) * self.__width) + "\n"
         return rectangle[:-1]
 
     def __repr__(self):
