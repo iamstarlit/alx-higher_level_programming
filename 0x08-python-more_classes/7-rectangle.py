@@ -37,7 +37,7 @@ class Rectangle(object):
         rectangle = ""
 
         for symbol in range(self.__height):
-            rectangle += (str(Rectangle.print_symbol * self.__width)) + "\n"
+            rectangle += (Rectangle.print_symbol * self.__width) + "\n"
 
         return rectangle[:-1]
 

@@ -19,14 +19,14 @@ class Rectangle(object):
         self.height = height
 
     def __str__(self) -> str:
-        if self.__width == 0 or self.__height == 0:
-            return ("")
+        if self.__height == 0 or self.__width == 0:
+            return rectangle
+
         rectangle = ""
-        for column in range(self.__height):
-            for row in range(self.__width):
-                rectangle += "#"
-            if column < self.__height - 1:
-                rectangle += "\n"
+
+        for symbol in range(self.__height):
+            rectangle += ("#" * self.__width) + "\n"
+
         return rectangle
 
     @property
