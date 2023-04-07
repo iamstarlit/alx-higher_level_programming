@@ -2,6 +2,7 @@
 
 """A module of the algorithm to solve N queens puzzle."""
 
+
 def is_safe(m_queen, nqueen):
     """checks if the queens can or cannot kill each other.
 
@@ -23,9 +24,10 @@ def is_safe(m_queen, nqueen):
 
         # check if queens are in the same diagonal
         if abs(m_queen[index] - m_queen[nqueen]) == abs(index - nqueen):
-               return False
+            return False
 
     return True
+
 
 def print_result(m_queen, nqueen):
     """prints the list of queens positions.
@@ -43,6 +45,7 @@ def print_result(m_queen, nqueen):
         result.append([i, m_queen[i]])
 
     print(result)
+
 
 def Queen(m_queen, nqueen):
     """Recursively executes Backtracking algorithm.
@@ -72,6 +75,7 @@ def Queen(m_queen, nqueen):
             if nqueen is not len(m_queen):
                 Queen(m_queen, nqueen + 1)
 
+
 def NQueen(size):
     """Invokes the Backtracking algorithm.
 
@@ -81,7 +85,7 @@ def NQueen(size):
     """
 
     m_queen = [-1 for i in range(size)]
-    
+
     Queen(m_queen, 0)
 
 
@@ -94,7 +98,7 @@ if __name__ == "__main__":
 
     try:
         size = int(sys.argv[1])
-    except:
+    except TypeError:
         print("N must be a number")
         sys.exit(1)
 
