@@ -30,16 +30,16 @@ class Rectangle(object):
         # Increment 'number_of_instances'
         Rectangle.number_of_instances += 1
 
-    def __str__(self) -> str:
+    def __str__(self):
         if self.__width == 0 or self.__height == 0:
-            return ("")
+            return rectangle
+
         rectangle = ""
-        for column in range(self.__height):
-            for row in range(self.__width):
-                rectangle += Rectangle.print_symbol
-            if column < self.__height - 1:
-                rectangle += "\n"
-        return rectangle
+
+        for symbol in range(self.__height):
+            rectangle += (str(Rectangle.print_symbol * self.__width)) + "\n"
+
+        return rectangle[:-1]
 
     def __repr__(self):
         return "Rectangle({:d}, {:d})".format(self.__width, self.__height)
