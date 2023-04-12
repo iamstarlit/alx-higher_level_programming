@@ -7,7 +7,3 @@ avoids dynamically creating attributes
 
 class LockedClass(object):
     __slots__ = ['first_name']
-
-    def __init__(self):
-        """Initializes an instance of LockedClass class."""
-        pass
