@@ -22,16 +22,16 @@ def pascal_triangle(n):
     # Initialize first row of Pascal's Triangle.
     triangle = [[1]]
 
-    #Generate the remaining rows of Pascal's Triangle.
+    # Generate the remaining rows of Pascal's Triangle.
     while len(triangle) < n:
         prev_row = triangle[-1]
-        new_row = [1] # Start with 1
-        
+        new_row = [1]   # Start with 1
+
         for i in range(len(prev_row) - 1):
             # Calculate the sum of adjacent elements
             new_row.append(prev_row[i] + prev_row[i+1])
 
-        new_row.append(1) # End with 1
+        new_row.append(1)   # End with 1
         triangle.append(new_row)
 
     return triangle
