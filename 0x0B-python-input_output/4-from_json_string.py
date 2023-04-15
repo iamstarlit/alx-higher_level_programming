@@ -18,4 +18,4 @@ def from_json_string(my_str):
     Returns:
        obj: Python data structure object
     """
-    return json.dumps(my_str)
+    return json.loads(my_str)
