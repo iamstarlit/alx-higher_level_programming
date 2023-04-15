@@ -14,4 +14,4 @@ def read_file(filename=""):
         Exception: if file cannot be opened
     """
     with open(filename, mode="r", encoding="utf-8") as f:
-        print(f.read())
+        print(f.read(), end='')
