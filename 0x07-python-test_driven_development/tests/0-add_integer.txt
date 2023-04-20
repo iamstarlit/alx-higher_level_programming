@@ -21,7 +21,7 @@ Testing adding real numbers using the add_integer() function.
 -30
 
 >>> add_integer(-10.5, 20)
-9
+10
 
 
 Testing invalid inputs
