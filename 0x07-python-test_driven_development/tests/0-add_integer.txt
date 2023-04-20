@@ -23,6 +23,12 @@ Testing adding real numbers using the add_integer() function.
 >>> add_integer(-10.5, 20)
 10
 
+>>> add_integer(10)
+108
+
+>>> add_integer(10.5)
+108
+
 
 Testing invalid inputs
 
@@ -32,6 +38,11 @@ Traceback (most recent call last):
 TypeError: a must be an integer.
 
 >>> add_integer(10, '20') # doctest: +ELLIPSIS
+Traceback (most recent call last):
+    ...
+TypeError: b must be an integer.
+
+>>> add_integer(10, []) # doctest: +ELLIPSIS
 Traceback (most recent call last):
     ...
 TypeError: b must be an integer.
