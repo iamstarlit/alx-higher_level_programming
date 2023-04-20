@@ -1,0 +1,37 @@
+0-add_integer.txt
+
+This is a test file to test the function `add_integer` in
+a `0-add_integer` module.
+
+
+Importing `0-add_integer` module.
+
+>>> add_integer = __import__("0-add_integer").add_integer
+
+
+Testing adding real numbers using the add_integer() function.
+
+>>> add_integer(0, 0)
+0
+
+>>> add_integer(10, 20)
+30
+
+>>> add_integer(-10,-20)
+-30
+
+>>> add_integer(-10.5, 20)
+9
+
+
+Testing invalid inputs
+
+>>> add_integer('10', 20) # doctest: +ELLIPSIS
+Traceback (most recent call last):
+    ...
+TypeError: a must be an integer.
+
+>>> add_integer(10, '20') # doctest: +ELLIPSIS
+Traceback (most recent call last):
+    ...
+TypeError: b must be an integer.
