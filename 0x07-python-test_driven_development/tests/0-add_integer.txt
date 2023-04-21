@@ -63,3 +63,15 @@ Testing invalid inputs
     Traceback (most recent call last):
         ...
     TypeError: b must be an integer
+
+    # Case float overflow
+    >>> add_integer(float('inf'), 0) # doctest: +ELLIPSIS
+    Traceback (most recent call last):
+        ...
+    OverflowError: cannot convert float infinity to integer
+
+    # Case Not a Number (NaN)
+    >>> add_integer(0, float('nan')) # doctest: +ELLIPSIS
+    Traceback (most recent call last):
+        ...
+    ValueError: cannot convert float NaN to integer
