@@ -1,0 +1,51 @@
+3-say_my_name.txt
+=====================================================================
+
+This is a test file to test `say_my_name` function in
+`3-say_my_name` module.
+_____________________________________________________________________
+
+
+Importing Module
+----------------
+
+::
+    >>> say_my_name = __import__("3-say_my_name").say_my_name
+
+
+Testing passing string names to `say_my_name(first_name, last_name="")`.
+------------------------------------------------------------------------
+
+::
+    # Passing string names arguments
+    >>> say_my_name("First", "Last")
+    My name is First Last
+
+    # Passing `first_name` argument without `last_name`
+    >>> say_my_name("First")
+    My name is First 
+
+
+Testing invalid inputs
+----------------------
+
+::
+    # Passing a non-string first name
+    >>> say_my_name(True) # doctest: +ELLIPSIS
+    Traceback (most recent call last):
+        ...
+    TypeError: first_name must be a string
+
+    # Passing a None as last name
+    >>> say_my_name("First", None) # doctest: +ELLIPSIS
+    Traceback (most recent call last):
+        ...
+    TypeError: last_name must be a string
+
+    # Calling the function without any argument
+    say_my_name() # doctest: +NORMALIZE_WHITESPACE, +ELLIPSIS
+    Traceback (most recent call last):
+        ...
+    TypeError: say_my_name() missing 1 required
+    positional argument: 'first_name'
+
