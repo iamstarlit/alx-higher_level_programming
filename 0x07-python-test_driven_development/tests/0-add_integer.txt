@@ -1,48 +1,65 @@
 0-add_integer.txt
+===========================================================
 
 This is a test file to test the function `add_integer` in
 a `0-add_integer` module.
+___________________________________________________________
 
 
 Importing `0-add_integer` module.
+---------------------------------
 
->>> add_integer = __import__("0-add_integer").add_integer
+::
+    >>> add_integer = __import__("0-add_integer").add_integer
 
 
 Testing adding real numbers using the add_integer() function.
+-------------------------------------------------------------
 
->>> add_integer(0, 0)
-0
+::
+    # adding zero integers
+    >>> add_integer(0, 0)
+    0
 
->>> add_integer(10, 20)
-30
+    # Adding positive integers
+    >>> add_integer(10, 20)
+    30
 
->>> add_integer(-10,-20)
--30
+    # Adding negative integers
+    >>> add_integer(-10,-20)
+    -30
 
->>> add_integer(-10.5, 20)
-10
+    # Adding negative float and positive integer
+    >>> add_integer(-10.5, 20)
+    10
 
->>> add_integer(10)
-108
+    # Adding positive value to the default value of `b=98`
+    >>> add_integer(10)
+    108
 
->>> add_integer(10.5)
-108
+    # Adding float positve value to the default value of `b=98`
+    >>> add_integer(10.5)
+    108
 
 
 Testing invalid inputs
+----------------------
 
->>> add_integer('10', 20) # doctest: +ELLIPSIS
-Traceback (most recent call last):
-    ...
-TypeError: a must be an integer
+::
+    # Adding string to a positive integer
+    >>> add_integer('10', 20) # doctest: +ELLIPSIS
+    Traceback (most recent call last):
+        ...
+    TypeError: a must be an integer
 
->>> add_integer(10, '20') # doctest: +ELLIPSIS
-Traceback (most recent call last):
-    ...
-TypeError: b must be an integer
+    # Adding positive integer with a string
+    >>> add_integer(10, 'hello') # doctest: +ELLIPSIS
+    Traceback (most recent call last):
+        ...
+    TypeError: b must be an integer
 
->>> add_integer(10, []) # doctest: +ELLIPSIS
-Traceback (most recent call last):
-    ...
-TypeError: b must be an integer
+    # Adding negative integer with a list
+    >>> add_integer(-10, []) # doctest: +ELLIPSIS
+    Traceback (most recent call last):
+        ...
+    TypeError: b must be an integer
