@@ -21,17 +21,14 @@ Testing dividing `matrix` by non-zero numbers.
     >>> matrix_divided([[1, 2, 3],[4, 5, 6]], 2)
     [[0.5, 1.0, 1.5], [2.0, 2.5, 3.0]]
 
-::
     # Dividing a matrix by a negative integer
     >>> matrix_divided([[1, 2, 3],[4, 5, 6]], -2)
     [[-0.5, -1.0, -1.5], [-2.0, -2.5, -3.0]]
 
-::
     # Dividing a matrix by a float number
     >>> matrix_divided([[10, 20, 30], [10.4, 5.3, 21.7], [-20, -9.6, 0]], 2.5)
     [[4.0, 8.0, 12.0], [4.16, 2.12, 8.68], [-8.0, -3.84, 0.0]]
 
-::
     # Dividing an empty matrix
     >>> matrix_divided([[]], 2)
     [[]]
@@ -50,21 +47,18 @@ Testing invalid inputs.
         ...
     TypeError: matrix must be a matrix (list of lists) of integers/floats
 
-::
     # Dividing an empty list by integer
     >>> matrix_divided([], 2) # doctest: +ELLIPSIS
     Traceback (most recent call last):
         ...
     TypeError: matrix must be a matrix (list of lists) of integers/floats
 
-::
     # Dividing a list by `div`
     >>> matrix_divided([1, 2, 3], 2) # doctest: +ELLIPSIS
     Traceback (most recent call last):
         ...
     TypeError: matrix must be a matrix (list of lists) of integers/floats
 
-::
     # Dividing uneven matrix by `div`
     matrix_divided([[1, 2, 3],[4, 5, 6, 7]], -2) # doctest: +ELLIPSIS
     Traceback (most recent call last):
@@ -82,14 +76,12 @@ Testing invalid inputs.
         ...
     ZeroDivisionError: division by zero
 
-::
     # Dividing matrix by a string
     >>> matrix_divided([[1, 2, 3],[4, 5, 6]], "div") # doctest: +ELLIPSIS
     Traceback (most recent call last):
         ...
     TypeError: div must be a number
 
-::
     # Dividing matrix by a complex number
     >>> matrix_divided([[1, 2, 3],[4, 5, 6]], 2 + 5j) # doctest: +ELLIPSIS
     Traceback (most recent call last):
