@@ -43,7 +43,7 @@ Testing invalid inputs
     TypeError: last_name must be a string
 
     # Calling the function without any argument
-    say_my_name() # doctest: +NORMALIZE_WHITESPACE, +ELLIPSIS
+    >>> say_my_name() # doctest: +NORMALIZE_WHITESPACE, +ELLIPSIS
     Traceback (most recent call last):
         ...
     TypeError: say_my_name() missing 1 required
