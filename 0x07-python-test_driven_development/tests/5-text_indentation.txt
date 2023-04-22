@@ -1,0 +1,70 @@
+5-text_indentation.txt
+===============================================================================
+
+This is a test file that tests the function `text_indentation(text)` in the
+`5-text_indentantion` module.
+
+The function prints two new lines after each of the characters `.`, `?`, and 
+`:` and removes any extra space at the end or beginning of a text.
+_______________________________________________________________________________
+
+
+Importing Module.
+-----------------
+
+::
+    >>> text_indentation = __import__("5-text_indentation").text_indentation
+
+
+Testing valid inputs to the function.
+-------------------------------------
+
+::
+    # Simple text input
+    >>> text_indentation("How?")
+    How?
+    <BLANKLINE>
+
+    # No spaces are printed at the beginning and end of a line.
+    >>> text_indentation("  It's you, right.  ")
+    It's you, right.
+    <BLANKLINE>
+
+    # New lines printed for specified characters.
+    >>> text_indentation("You know, I am on a new line. You too? Me too:")
+    You know, I am on a new line.
+    <BLANKLINE>
+    You too?
+    <BLANKLINE>
+    Me too:
+    <BLANKLINE>
+
+    # New lines are printed
+    >>> text_indentation("New lines\n\n, are printed too.")
+    New lines
+    <BLANKLINE>
+    , are printed too.
+    <BLANKLINE>
+
+
+Testing invalid inputs.
+----------------------
+
+::
+    # Passing non-string value
+    >>> text_indentation(1) # doctest: +ELLIPSIS
+    Traceback (most recent call last):
+        ...
+    TypeError: text must be a string
+
+    # Not passing any argument
+    >>> text_indentation() # doctest: +ELLIPSIS
+    Traceback (most recent call last):
+        ...
+    TypeError: text_indentation() missing 1 required positional argument: 'text'
+
+    # Passing a list
+    >>> text_indentation(["string", 2, True]) # doctest: +ELLIPSIS
+    Traceback (most recent call last):
+        ...
+    TypeError: text must be a string
