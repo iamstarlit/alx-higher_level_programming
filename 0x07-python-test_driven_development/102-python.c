@@ -12,36 +12,39 @@
  */
 void print_python_string(PyObject *p)
 {
-    Py_ssize_t length;
     const char *value;
+    Py_ssize_t length;
+    Py_UCS4 *unicode;
+    Py_ssize_t i;
+    PyUnicodeObject *unicodeObject;
 
     printf("[.] string object info\n");
 
-    if (PyUnicode_Check(p))
-    {
-        if (PyUnicode_IS_ASCII(p))
-        {
-            printf("  type: compact ascii\n");
-        }
-        else
-        {
-            printf("  type: compact unicode object\n");
-        }
+    if (PyUnicode_Check(p)) {
+        unicodeObject = (PyUnicodeObject *) p;
         length = PyUnicode_GET_LENGTH(p);
-        value = PyUnicode_AsUTF8AndSize(p, &length);
-        printf("  length: %ld\n", length);
-        printf("  value: %s\n", value);
-    }
-    else if (PyBytes_Check(p))
-    {
-        printf("  type: bytes\n");
+        printf("  type: %s\n", "unicode object");
+
+        if (PyUnicode_IS_COMPACT_ASCII(unicodeObject)) {
+            value = PyUnicode_AsUTF8AndSize(p, &length);
+            printf("  length: %ld\n", length);
+            printf("  value: %s\n", value);
+        } else {
+            printf("  length: %ld\n", length);
+            printf("  value: %ls\n", PyUnicode_AsWideCharString(p, &length));
+        }
+
+    } else if (PyBytes_Check(p)) {
+        printf("  type: %s\n", "bytes");
+
+        PyBytesObject *bytesObject = (PyBytesObject *) p;
         length = PyBytes_GET_SIZE(p);
         value = PyBytes_AsString(p);
+
         printf("  length: %ld\n", length);
         printf("  value: %s\n", value);
-    }
-    else
-    {
+
+    } else {
         printf("  [ERROR] Invalid String Object\n");
     }
 }
