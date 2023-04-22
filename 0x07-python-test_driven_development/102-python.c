@@ -12,33 +12,16 @@
  */
 void print_python_string(PyObject *p)
 {
-	/* Declare Python Objects */
-	PyObject *str, *repr;
 	long int length;
 
-	/* Unused variable */
-	(void)repr;
+	fflush(stdout);
 
 	printf("[.] string object info\n");
-
-	/* Check if p is a string object */
-	if (strcmp(p->ob_type->tp_name, "str"))
+	if (strcmp(p->ob_type->tp_name, "str") != 0)
 	{
-		printf(" [ERROR] Invalid String Object\n");
+		printf("  [ERROR] Invalid String Object\n");
 		return;
 	}
-
-	/* Check if the string is compact ASCII or compact Unicode */
-	if (PyUnicode_IS_COMPACT_ASCII(p))
-		printf(" type: compact ascii\n");
-	else
-		printf(" type: compact unicode object\n");
-
-	/* Get the string representantion of the object */
-	repr = PyObject_Repr(p);
-
-	/* Get the encoded string using the utf-8 encoding */
-	str = PyUnicode_AsEncodedString(p, "utf-8", "~E~");
 
 	/* Lenght of the string */
 	length = ((PyASCIIObject *)(p))->length;
