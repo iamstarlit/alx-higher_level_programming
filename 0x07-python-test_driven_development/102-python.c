@@ -1,50 +1,50 @@
-#include <stdio.h>
-#include <string.h>
 #include <Python.h>
+#include <stdio.h>
 
-/**
- * print_python_string - Prints string information
- * @p: Python Object
- *
- * Description: This function prints information about a Python string object.
- * It checks whether the object passed is indeed a string, prints its type
- * (either compact ASCII, compact Unicode, or legacy string), its length, and its value.
- */
 void print_python_string(PyObject *p)
 {
-    const char *value;
     Py_ssize_t length;
-    Py_UCS4 *unicode;
-    Py_ssize_t i;
-    PyUnicodeObject *unicodeObject;
+    Py_UNICODE *unicode;
+    char *value;
+    unsigned int i, kind;
 
     printf("[.] string object info\n");
 
-    if (PyUnicode_Check(p)) {
-        unicodeObject = (PyUnicodeObject *) p;
-        length = PyUnicode_GET_LENGTH(p);
-        printf("  type: %s\n", "unicode object");
-
-        if (PyUnicode_IS_COMPACT_ASCII(unicodeObject)) {
-            value = PyUnicode_AsUTF8AndSize(p, &length);
-            printf("  length: %ld\n", length);
-            printf("  value: %s\n", value);
-        } else {
-            printf("  length: %ld\n", length);
-            printf("  value: %ls\n", PyUnicode_AsWideCharString(p, &length));
-        }
-
-    } else if (PyBytes_Check(p)) {
-        printf("  type: %s\n", "bytes");
-
-        PyBytesObject *bytesObject = (PyBytesObject *) p;
-        length = PyBytes_GET_SIZE(p);
-        value = PyBytes_AsString(p);
-
-        printf("  length: %ld\n", length);
-        printf("  value: %s\n", value);
-
-    } else {
+    if (!PyUnicode_Check(p)) {
         printf("  [ERROR] Invalid String Object\n");
+        return;
     }
+
+    length = PyUnicode_GET_LENGTH(p);
+    unicode = PyUnicode_AsUnicode(p);
+    kind = PyUnicode_KIND(p);
+
+    if (kind == PyUnicode_1BYTE_KIND) {
+        value = (char *) PyUnicode_1BYTE_DATA(p);
+        printf("  type: compact ascii\n");
+    }
+    else if (kind == PyUnicode_2BYTE_KIND) {
+        value = (char *) PyUnicode_2BYTE_DATA(p);
+        printf("  type: compact unicode object\n");
+    }
+    else if (kind == PyUnicode_4BYTE_KIND) {
+        value = (char *) PyUnicode_4BYTE_DATA(p);
+        printf("  type: compact unicode object\n");
+    }
+    else {
+        printf("  [ERROR] Invalid String Object\n");
+        return;
+    }
+
+    printf("  length: %ld\n", length);
+    printf("  value: ");
+
+    for (i = 0; i < length; i++) {
+        if (kind == PyUnicode_1BYTE_KIND)
+            putchar(value[i]);
+        else
+            printf("%04x", unicode[i]);
+    }
+
+    putchar('\n');
 }
