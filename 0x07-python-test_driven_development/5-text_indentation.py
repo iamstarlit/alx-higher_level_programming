@@ -6,6 +6,7 @@ A module that contains a function that prints
 two newlines after each specified symbol.
 """
 
+
 def text_indentation(text):
     """Prints two new lines after a specified character.
 
@@ -14,7 +15,7 @@ def text_indentation(text):
     the beginning and end of the text.
 
     Args:
-        text (str): text parameter to check 
+        text (str): text parameter to check
 
     Raises:
         TypeError: If `text` is not a string
