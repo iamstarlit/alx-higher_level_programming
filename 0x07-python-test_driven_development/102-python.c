@@ -14,6 +14,7 @@ void print_python_string(PyObject *p)
 {
 	/* Declare Python Objects */
 	PyObject *str, *repr;
+	long int length;
 
 	/* Unused variable */
 	(void)repr;
@@ -39,7 +40,10 @@ void print_python_string(PyObject *p)
 	/* Get the encoded string using the utf-8 encoding */
 	str = PyUnicode_AsEncodedString(p, "utf-8", "~E~");
 
+	/* Lenght of the string */
+	length = ((PyASCIIObject *)(p))->length;
+
 	/* Print the length and value of the string object */
-	printf(" lenght: %ld\n", PyUnicode_GET_SIZE(p));
-	printf(" value: %s\n", PyBytes_AsString(str));
+	printf(" lenght: %ld\n", length);
+	printf(" value: %ls\n", PyUnicode_AsWideCharString(p, &length));
 }
