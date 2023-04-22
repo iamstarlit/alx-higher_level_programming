@@ -3,30 +3,41 @@
 #include <Python.h>
 
 /**
- * print_python_string - Prints string information
- * @p: Python Object
+ * print_python_string - Prints information about a Python string object
  *
- * Description: This function prints information about a Python string object.
- * It checks whether the object passed is indeed a string, prints its type
- * (either compact ASCII or compact Unicode), its lenght, and its value.
+ * @p: Python object
+ *
+ * This function prints the type (either compact ASCII or compact Unicode),
+ * length, and value of a Python string object.
  */
 void print_python_string(PyObject *p)
 {
-	long int length;
+    long int str_len;
 
-	fflush(stdout);
+    fflush(stdout);
 
-	printf("[.] string object info\n");
-	if (strcmp(p->ob_type->tp_name, "str") != 0)
-	{
-		printf("  [ERROR] Invalid String Object\n");
-		return;
-	}
+    printf("[.] string object info\n");
 
-	/* Lenght of the string */
-	length = ((PyASCIIObject *)(p))->length;
+    /* Check if object is a string */
+    if (strcmp(p->ob_type->tp_name, "str") != 0)
+    {
+        printf("  [ERROR] Invalid String Object\n");
+        return;
+    }
 
-	/* Print the length and value of the string object */
-	printf(" lenght: %ld\n", length);
-	printf(" value: %ls\n", PyUnicode_AsWideCharString(p, &length));
+    /* Get the length of the string */
+    str_len = ((PyASCIIObject *)(p))->length;
+
+    /* Print the length and value of the string */
+    printf(" length: %ld\n", str_len);
+
+    /* Get a wide character string representation of the string */
+    wchar_t *wide_str = PyUnicode_AsWideCharString(p, &str_len);
+    if (wide_str == NULL)
+    {
+        printf("  [ERROR] Could not convert string to wide character string\n");
+        return;
+    }
+    printf(" value: %ls\n", wide_str);
+    PyMem_Free(wide_str);
 }
