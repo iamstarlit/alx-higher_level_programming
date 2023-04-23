@@ -1,6 +1,14 @@
 #include <Python.h>
 #include <stdio.h>
 
+/**
+ * print_python_string - Prints string information
+ * @p: Python Object
+ *
+ * Description: This function prints information about a Python string object.
+ * It checks whether the object passed is indeed a string, prints its type
+ * (either compact ASCII, compact Unicode, or legacy string), its length, and its value.
+ */
 void print_python_string(PyObject *p)
 {
     Py_ssize_t length;
