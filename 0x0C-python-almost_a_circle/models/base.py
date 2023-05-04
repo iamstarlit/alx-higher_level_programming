@@ -16,10 +16,16 @@ class Base(object):
         Args:
             id (int): id parameter
         """
+        # Check if ID is not an int.
+        if id is not None and not isinstance(id, int):
+            raise TypeError("ID must be an integer.")
+
         # Check if id is None
-        if id:
-            self.id = id
+        if id is None:
+            self.__nb_objects += 1
+            self.id = self.__nb_objects
         else:
-            # Increment no of objects.
-            Base.__nb_objects += 1
-            self.id = Base.__nb_objects
+            # Check if ID is negative
+            if id <= 0:
+                raise ValueError("ID must be a non-zero  positive integer.")
+            self.id = id
