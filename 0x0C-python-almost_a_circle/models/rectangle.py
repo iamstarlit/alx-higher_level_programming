@@ -131,7 +131,7 @@ class Rectangle(Base):
             int: area of a rectangle.
         """
         return (self.height * self.width)
-    
+
     def display(self):
         """Prints a reactangle."""
         for symbol in range(self.height):
