@@ -27,3 +27,11 @@ class TestRectangle(unittest.TestCase):
         r2 = Rectangle(10, 20)
 
         self.assertEqual(r2.id, 1)
+
+    def test_exceptions(self):
+        """Tests Exceptions of Rectangle class."""
+        with self.assertRaises(TypeError):
+            r3 = Rectangle("1", 1.5, "5", "6")
+
+        with self.assertRaises(ValueError):
+            r4 = Rectangle(0, -1, -5, 0)
