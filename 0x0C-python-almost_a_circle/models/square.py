@@ -1,51 +1,87 @@
-#!/usr/bin/python3
-"""
-square.py
-
-A module that contains a subclass that inherites form a Rectangle class.
+""" 
+This module contains the Square class, which inherits from the Rectangle class.
 """
 
 from models.rectangle import Rectangle
 
 
 class Square(Rectangle):
-    """A subclass that inherites from the Rectangle class."""
+    """ 
+    Represents a square, which is a special kind of rectangle where
+    the width and height are equal.
+    """
 
     def __init__(self, size, x=0, y=0, id=None):
-        """Instantiates an object of a Square subclass.
+        """
+        Initializes a new Square object.
 
         Args:
-            size (int): size of sides of a Square.
-            x (int): horizontal coordinate of a Square.
-            y (int): Vertical coordinate of a square.
-            id (int): ID of the object.
+            size (int): The size of the square.
+            x (int): The x-coordinate of the square.
+            y (int): The y-coordinate of the square.
+            id (int): The ID of the square.
         """
         super().__init__(size, size, x, y, id)
 
-        @property
-        def size(self):
-            """Gets the size of the Square.
+    def __str__(self):
+        """
+        Returns a string representation of the square.
 
-            Returns:
-                int: size of the Square.
-            """
-            return self.width
+        Returns:
+            str: A string representation of the square.
+        """
+        return f"[Square] ({self.id}) {self.x}/{self.y} - {self.width}"
 
-        @size.setter
-        def size(self, size):
-            """Sets the size of the Square.
+    @property
+    def size(self):
+        """
+        Gets the size of the square.
 
-            Args:
-                size (int): size of the Square.
-            """
-            self.height = size
-            self.width = size
+        Returns:
+            int: The size of the square.
+        """
+        return self.width
 
-        def __str__(self):
-            """String Representantion of a Square.
+    @size.setter
+    def size(self, value):
+        """
+        Sets the size of the square.
 
-            Returns:
-                str: string representantion of a Square.
-            """
-            return "[Square] ({}) {}/{} - {}".format(
-                    self.id, self.x, self.y, self.height)
+        Args:
+            value (int): The new size of the square.
+        """
+        self.width = value
+        self.height = value
+
+    def update(self, *args, **kwargs):
+        """
+        Updates the square with the given arguments.
+
+        Args:
+            *args: The arguments to update the square with.
+            **kwargs: The keyword arguments to update the square with.
+        """
+        if args:
+            list_atr = ['id', 'size', 'x', 'y']
+            for i, value in enumerate(args):
+                setattr(self, list_atr[i], value)
+        else:
+            for key, value in kwargs.items():
+                setattr(self, key, value)
+
+        if 'size' in kwargs:
+            self.width = kwargs['size']
+            self.height = kwargs['size']
+
+    def to_dictionary(self):
+        """
+        Returns a dictionary representation of the square.
+
+        Returns:
+            dict: A dictionary representation of the square.
+        """
+        return {'id': self.id,
+                'size': self.size,
+                'x': self.x,
+                'y': self.y}
+
