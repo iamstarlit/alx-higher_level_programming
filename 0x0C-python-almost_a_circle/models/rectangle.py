@@ -145,22 +145,24 @@ class Rectangle(Base):
         for _ in range(self.height):
             print(' ' * self.x + '#' * self.width)
 
-    def update(self, *args):
+    def update(self, *args, **kwargs):
         """Assigns Arguments to each attribute
 
         Args:
-            args: attribute arguments.
+            *args: attribute arguments.
+            **kwargs: key-worded attribute arguments.
         """
+        # List of attributes
+        attrs = ['id', 'width', 'height', 'x', 'y']
+
+        # Assign non-keyworded arguments
         for i, arg in enumerate(args):
-            if i == 0:
-                self.id = arg
-            elif i == 1:
-                self.width = arg
-            elif i == 2:
-                self.height = arg
-            elif i == 3:
-                self.x = arg
-            elif i == 4:
-                self.y = arg
+            if i < len(attrs):
+                setattr(self, attrs[i], arg)
             else:
                 break
+
+        # Set key-worded arguments
+        for key, value in kwargs.items():
+            if key in attrs:
+                setattr(self, key, value)
