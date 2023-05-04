@@ -43,6 +43,13 @@ class Rectangle(Base):
         Args:
            width (int): width of Rectangle.
         """
+        # Check if width is an integer.
+        if not isinstance(width, int):
+            raise TypeError("width must be an integer")
+        # Check if width is negative or zero
+        if width <= 0:
+            raise ValueError("width must be > 0")
+
         self.__width = width
 
     @property
@@ -60,6 +67,13 @@ class Rectangle(Base):
         Args:
             height (int): height of Rectangle.
         """
+        # Check if height is an integer.
+        if not isinstance(height, int):
+            raise TypeError("height must be an integer")
+        # Check if height is negative or zero
+        if height <= 0:
+            raise ValueError("height must be > 0")
+
         self.__height = height
 
     @property
@@ -77,6 +91,13 @@ class Rectangle(Base):
         Args:
             x (int): horizontal coordinate of the Rectangle.
         """
+        # Check if `x` is not an integer
+        if not isinstance(x, int):
+            raise TypeError("x must be an integer")
+        # Check if `x` is negative or zero
+        if x < 0:
+            raise ValueError("x must be > 0")
+
         self.__x = x
 
     @property
@@ -94,4 +115,11 @@ class Rectangle(Base):
         Args:
             y (int): vertical coodrinate of the Rectangle.
         """
+        # Check if `y` is not an integer
+        if not isinstance(y, int):
+            raise TypeError("y must be an integer")
+        # Check if `y` is negative or zero
+        if y < 0:
+            raise ValueError("y must be > 0")
+
         self.__y = y
