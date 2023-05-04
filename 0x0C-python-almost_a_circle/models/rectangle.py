@@ -96,7 +96,7 @@ class Rectangle(Base):
             raise TypeError("x must be an integer")
         # Check if `x` is negative or zero
         if x < 0:
-            raise ValueError("x must be > 0")
+            raise ValueError("x must be >= 0")
 
         self.__x = x
 
@@ -120,6 +120,6 @@ class Rectangle(Base):
             raise TypeError("y must be an integer")
         # Check if `y` is negative or zero
         if y < 0:
-            raise ValueError("y must be > 0")
+            raise ValueError("y must be >= 0")
 
         self.__y = y
