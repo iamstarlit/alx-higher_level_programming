@@ -140,10 +140,10 @@ class Rectangle(Base):
 
     def display(self):
         """Prints a reactangle."""
-        rectangle = self.y * "\n"
+        for _ in range(self.y):
+            print()
+        for _ in range(self.height):
+            print(' ' * self.x + '#' * self.width)
 
-        for symbol in range(self.height):
-            rectangle += (" " * self.x)
-            rectangle += ("#" * self.width) + "\n"
-
-        print(rectangle, end='')
+    def update(self):
+        pass
