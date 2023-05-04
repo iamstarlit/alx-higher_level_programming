@@ -167,7 +167,6 @@ class Rectangle(Base):
             if key in attrs:
                 setattr(self, key, value)
 
-
     def to_dictionary(self):
         """
         Returns a dictionary representation of the square.
@@ -180,4 +179,3 @@ class Rectangle(Base):
                 'height': self.height,
                 'x': self.x,
                 'y': self.y}
-

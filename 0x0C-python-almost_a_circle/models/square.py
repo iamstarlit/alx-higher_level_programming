@@ -1,4 +1,6 @@
-""" 
+"""
+square.py
+
 This module contains the Square class, which inherits from the Rectangle class.
 """
 
@@ -6,7 +8,7 @@ from models.rectangle import Rectangle
 
 
 class Square(Rectangle):
-    """ 
+    """
     Represents a square, which is a special kind of rectangle where
     the width and height are equal.
     """
@@ -84,4 +86,3 @@ class Square(Rectangle):
                 'size': self.size,
                 'x': self.x,
                 'y': self.y}
-
