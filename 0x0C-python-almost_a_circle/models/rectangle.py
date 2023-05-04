@@ -126,8 +126,9 @@ class Rectangle(Base):
 
     def __str__(self):
         """String Representation of a an object."""
-        return "({}) {}/{} - {}/{}".format(self.id, self.x, self.y,
-                                           self.width, self.height)
+        return "[Rectangle] ({}) {}/{} - {}/{}".format(self.id, self.x,
+                                                       self.y, self.width,
+                                                       self.height)
 
     def area(self):
         """Computes Area of a rectangle.
