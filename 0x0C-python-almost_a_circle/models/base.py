@@ -68,3 +68,17 @@ class Base(object):
         # Write to json file
         with open(filename, 'w') as f:
             f.write(cls.to_json_string(list_dict))
+
+    @staticmethod
+    def from_json_string(json_string):
+        """JSON string into list of dictinaries.
+
+        Args:
+            json_string (json): JSON string
+
+        Returns:
+            list: list of dictinaries
+        """
+        if json_string is None:
+            return []
+        return json.loads(json_string)
