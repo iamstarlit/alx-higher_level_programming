@@ -65,5 +65,5 @@ class Base(object):
             list_dict.append(obj.to_dictionary())
 
         # Write to json file
-        with open(filename, 'bw') as f:
-            f.write(cls.to_json_string(list_dict).encode())
+        with open(filename, 'w') as f:
+            f.write(cls.to_json_string(list_dict))
