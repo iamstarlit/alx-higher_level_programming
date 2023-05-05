@@ -2,6 +2,7 @@
 """base.py model contains the base class."""
 
 import json
+import csv
 
 
 class Base(object):
@@ -125,7 +126,7 @@ class Base(object):
 
         try:
             # Attempt to open the file and read its contents
-            with open(filename, "r") as f:
+            with open(filename) as f:
                 # Load the JSON data as a list of dictionaries
                 # using your custom from_json_string() method
                 json_data = cls.from_json_string(f.read())
@@ -137,4 +138,69 @@ class Base(object):
 
         except FileNotFoundError:
             # If the file doesn't exist, return an empty list
+            return []
+
+    @classmethod
+    def save_to_file_csv(cls, list_objs):
+        """Writes the list of objects to a CSV file.
+
+        Args:
+            list_objs (list): list of objects
+        """
+        if list_objs is None:
+            list_objs = []
+
+        # Create file name.
+        filename = "{}.csv".format(cls.__name__)
+
+        if cls.__name__ == "Rectangle":
+            list_keys = ['id', 'width', 'height', 'x', 'y']
+        else:
+            list_keys = ['id', 'size', 'x', 'y']
+
+        # Append rows to a list
+        csv_rows = []
+
+        for obj in list_objs:
+            dict_obj = obj.to_dictionary()
+            row = [dict_obj[key] for key in list_keys]
+            csv_rows.append(row)
+
+        # Write to a CSV file.
+        with open(filename, 'w', newline='') as csv_obj:
+            # Create Writer object
+            writer = csv.writer(csv_obj)
+            writer.writerows(csv_rows)
+
+    @classmethod
+    def load_from_file_csv(cls):
+        """Load objects from a CSV file and instantiate them as class objs.
+
+        Returns:
+            list: A list of instantiated class objects
+        """
+        # Define filename using the class name
+        filename = "{}.csv".format(cls.__name__)
+
+        try:
+            # Attempt to open the file and read its contents
+            with open(filename) as csvfile:
+                if cls.__name__ == "Rectangle":
+                    list_keys = ['id', 'width', 'height', 'x', 'y']
+                else:
+                    list_keys = ['id', 'size', 'x', 'y']
+
+                # Use DictReader to read CSV file as list of dictionaries
+                list_dicts = csv.DictReader(csvfile, fieldnames=list_keys)
+
+                # Convert the values in the dictionaries to integers
+                list_dicts = [dict([k, int(v)] for k, v in d.items())
+                              for d in list_dicts]
+
+                # Create a list of instantiated objects from dictionary.
+                objects = [cls.create(**d) for d in list_dicts]
+                return objects
+
+        except FileNotFoundError:
+            # return empty list if file does not exist
             return []
