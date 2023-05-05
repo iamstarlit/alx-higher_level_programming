@@ -111,3 +111,30 @@ class Base(object):
 
             # Return the new instance
             return new_instance
+
+    @classmethod
+    def load_from_file(cls):
+        """Load objects from a JSON file and instantiate them as class objects.
+
+        Returns:
+            list: A list of instantiated class objects.
+
+        """
+        # Define the filename using the class name
+        filename = "{}.json".format(cls.__name__)
+
+        try:
+            # Attempt to open the file and read its contents
+            with open(filename, "r") as f:
+                # Load the JSON data as a list of dictionaries
+                # using your custom from_json_string() method
+                json_data = cls.from_json_string(f.read())
+
+                # Create a list of class objects instantiated
+                # from the dictionaries
+                objects = [cls.create(**d) for d in json_data]
+                return objects
+
+        except FileNotFoundError:
+            # If the file doesn't exist, return an empty list
+            return []
