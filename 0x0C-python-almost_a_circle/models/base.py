@@ -24,8 +24,8 @@ class Base(object):
 
         # Check if id is None
         if id is None:
-            self.__nb_objects += 1
-            self.id = self.__nb_objects
+            Base.__nb_objects += 1
+            self.id = Base.__nb_objects
         else:
             # Check if ID is negative
             if id <= 0:
@@ -37,7 +37,7 @@ class Base(object):
         """Converts a dictionary into JSON string.
 
         Args:
-            list_dictionaries (list/dict): list of dictionaries.
+            list_dictionaries (list): list of dictionaries.
         """
         # check if list is None
         if list_dictionaries is None or list_dictionaries == []:
