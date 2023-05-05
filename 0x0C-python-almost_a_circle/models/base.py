@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 """base.py model contains the base class."""
 
+import json
+
 
 class Base(object):
     """Defines the Base class.
@@ -29,3 +31,15 @@ class Base(object):
             if id <= 0:
                 raise ValueError("ID must be a non-zero  positive integer.")
             self.id = id
+
+    @staticmethod
+    def to_json_string(list_dictionaries):
+        """Converts a dictionary into JSON string.
+
+        Args:
+            list_dictionaries (list/dict): list of dictionaries.
+        """
+        # check if list is None
+        if list_dictionaries is None or list_dictionaries == []:
+            return "[]"
+        return json.dumps(list_dictionaries)
