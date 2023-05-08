@@ -14,7 +14,7 @@ from models.rectangle import Rectangle
 from models.base import Base
 
 
-class TestSquareMethods(unittest.TestCase):
+class TestSquare(unittest.TestCase):
     """ Suite to test Square class """
 
     def setUp(self):

@@ -13,7 +13,7 @@ from unittest import TestCase
 from unittest.mock import patch
 
 
-class TestBaseMethods(unittest.TestCase):
+class TestBase(unittest.TestCase):
     """ Suite to test Base class """
 
     def setUp(self):

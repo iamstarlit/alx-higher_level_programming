@@ -13,7 +13,7 @@ from models.rectangle import Rectangle
 from models.base import Base
 
 
-class TestRectangleMethods(unittest.TestCase):
+class TestRectangle(unittest.TestCase):
     """ Suite to test Rectangle class """
 
     def setUp(self):
