@@ -1,3 +1,3 @@
 -- Print full description of table.
-SHOW FULL COLUMNS FROM love;
+SHOW CREATE TABLE hbtn_0c_0;
 
