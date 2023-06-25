@@ -6,7 +6,6 @@ const size = parseInt(arg);
 // Check if size is not a number
 if (isNaN(size)) {
   console.log('Missing size');
-  return;
 }
 
 for (let i = 0; i < size; i += 1) {
