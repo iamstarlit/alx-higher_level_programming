@@ -6,7 +6,7 @@ let num = parseInt(arg);
 if (isNaN(num)) {
   console.log('Missing Missing number of occurrences');
 } else {
-  while (num) {
+  while (num > 0) {
     console.log('C is fun');
     num -= 1;
   }
