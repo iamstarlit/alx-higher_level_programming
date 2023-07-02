@@ -1,9 +1,16 @@
 #!/usr/bin/node
 
-const originalDict = require('./101-data').dict;
-console.log(originalDict);
+const dict = require('./101-data').dict;
+console.log(dict);
 
-const mappedList = Object.keys(originalDict).map(function (key) {
-  return originalDict[key] * parseInt(key, 10);
-});
-console.log(mappedList);
+const sortedDict = {};
+
+for (const key in dict) {
+  const occurrence = dict[key];
+
+  if (!sortedDict[occurrence]) {
+    sortedDict[occurrence] = [];
+  }
+  sortedDict[occurrence].push(key);
+}
+console.log(sortedDict);
