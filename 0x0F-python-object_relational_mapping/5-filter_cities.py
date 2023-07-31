@@ -1,51 +1,44 @@
 #!/usr/bin/python3
-"""
-Script that takes in the name of a state
-as an argument and lists all cities of that
-state, using the database `hbtn_0e_4_usa`.
-"""
+"""Lists all cities of a specific state from the database hbtn_0e_0_usa."""
 
-import MySQLdb as db
-from sys import argv
+import MySQLdb
+import sys
 
 
-def get_cities_by_state(user, password, database, state_name):
-    """Get all cities of a state from the database."""
+def list_cities_by_state(username, password, db_name, state_name):
+    """
+    Connects to the database and prints all cities of the given state.
+
+    Args:
+        username (str): MySQL username.
+        password (str): MySQL password.
+        db_name (str): Database name.
+        state_name (str): Name of the state.
+    """
     try:
-        db_connect = db.connect(host="localhost", port=3306,
-                                user=user, passwd=password, db=database)
-
-        with db_connect.cursor() as db_cursor:
-            query = """
-                SELECT cities.id, cities.name
-                FROM cities
-                JOIN states ON cities.state_id = states.id
-                WHERE states.name LIKE BINARY %(state_name)s
-                ORDER BY cities.id ASC
-            """
-            db_cursor.execute(query, {'state_name': state_name})
-            rows_selected = db_cursor.fetchall()
-
-        return rows_selected
-
-    except db.Error as e:
-        print(f"Error: {e}")
-        return None
+        db = MySQLdb.connect(host="localhost", user=username,
+                             passwd=password, db=db_name, port=3306)
+        with db.cursor() as cur:
+            cur.execute("""
+            SELECT cities.name FROM
+            cities INNER JOIN states ON states.id=cities.state_id
+            WHERE states.name=%s""", (state_name,)
+                        )
+            rows = cur.fetchall()
+            cities_list = [row[0] for row in rows]
+            print(", ".join(cities_list))
+    except MySQLdb.Error as e:
+        print("Error:", e)
+    finally:
+        if db:
+            db.close()
 
 
 if __name__ == "__main__":
-    if len(argv) != 5:
-        print("Usage: {} <USERNAME> <PASSWORD> <DATABASE> <STATE_NAME>"
-              .format(argv[0])
+    if len(sys.argv) != 5:
+        print("Usage: {} <username> <password> <database> <state_name>"
+              .format(sys.argv[0])
               )
-        exit(1)
-
-    user = argv[1]
-    password = argv[2]
-    database = argv[3]
-    state_name = argv[4]
-
-    cities = get_cities_by_state(user, password, database, state_name)
-
-    if cities:
-        print(", ".join(row[1] for row in cities))
+    else:
+        username, password, db_name, state_name = sys.argv[1:5]
+        list_cities_by_state(username, password, db_name, state_name)
