@@ -24,13 +24,18 @@ if __name__ == "__main__":
               .format(mysql_username, mysql_password, mysql_db_name)
               )
     engine = create_engine(db_url)
+    Base.metadata.create_all(engine)
     Session = sessionmaker(bind=engine)
     session = Session()
 
     # Add the State object 'Louisiana' to the database
-    new_state = State(name="Louisiana")
+    new_state = State(name='Louisiana')
     session.add(new_state)
     session.commit()
 
-    # Print the id of the newly added State object
-    print
+    # Query the State object with the name 'Louisiana' and print its id
+    new_instance = session.query(State).filter_by(name='Louisiana').first()
+    print(new_instance.id)
+
+    # Close the session
+    session.close()
