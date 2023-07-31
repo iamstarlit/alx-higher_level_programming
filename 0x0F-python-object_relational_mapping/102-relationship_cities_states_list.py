@@ -1,35 +1,21 @@
 #!/usr/bin/python3
+""" prints the State object with the name passed as argument from the database
 """
-Lists all City objects from the database hbtn_0e_101_usa along with their
-corresponding State names.
-"""
-
 import sys
 from relationship_state import Base, State
 from relationship_city import City
-from sqlalchemy import create_engine
+from sqlalchemy import (create_engine)
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import relationship
 
 
-if __name__ == '__main__':
-    # Connect to the MySQL server and database using provided credentials
-    mysql_username, mysql_password, mysql_db_name = sys.argv[1:4]
-
-    # Create engine and session
-    db_url = ("mysql+mysqldb://{}:{}@localhost:3306/{}"
-              .format(mysql_username, mysql_password, mysql_db_name),
-              pool_pre_ping=True
-              )
-
-    # Create a session to interact with the database
+if __name__ == "__main__":
+    engine = create_engine('mysql+mysqldb://{}:{}@localhost:3306/{}'
+                           .format(sys.argv[1], sys.argv[2], sys.argv[3]))
+    Base.metadata.create_all(engine)
     Session = sessionmaker(bind=engine)
     session = Session()
-
-    # Retrieve all City objects along with their corresponding State objects,
-    # ordered by City id
-    states = session.query(State).join(City).order_by(City.id).all()
-
-    # Print City objects and their corresponding State names
-    for state in states:
-        for city in state.cities:
-            print("{}: {} -> {}".format(city.id, city.name, state.name))
+    for instance in session.query(State).order_by(State.id):
+        for city_ins in instance.cities:
+            print(city_ins.id, city_ins.name, sep=": ", end="")
+            print(" -> " + instance.name)
