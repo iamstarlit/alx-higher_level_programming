@@ -7,6 +7,7 @@ from sqlalchemy.ext.declarative import declarative_base
 # Define the Base class using declarative_base()
 Base = declarative_base()
 
+
 # Define the State class
 class State(Base):
     """Defines the State class."""
