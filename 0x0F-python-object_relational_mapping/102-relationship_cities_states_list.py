@@ -1,12 +1,13 @@
 #!/usr/bin/python3
 """
-Prints the State object with the name passed as an argument from the database
+Lists all City objects from the database hbtn_0e_101_usa
 """
-import sys
+from sys import argv
 from relationship_state import Base, State
 from relationship_city import City
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+
 
 if __name__ == "__main__":
     # Check the number of command-line arguments
@@ -28,7 +29,6 @@ if __name__ == "__main__":
     # Use a context manager for the session
     Session = sessionmaker(bind=engine)
     with Session() as session:
-        # Query for all City objects and print their corresponding State name
+        # Query for all City objects and their corresponding State names
         for city in session.query(City).order_by(City.id):
             print(f"{city.id}: {city.name} -> {city.state.name}")
-
