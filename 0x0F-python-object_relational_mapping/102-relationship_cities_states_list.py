@@ -1,6 +1,6 @@
 #!/usr/bin/python3
-"""prints the State object with the name passed as argument from the db"""
-
+""" prints the State object with the name passed as argument from the database
+"""
 import sys
 from relationship_state import Base, State
 from relationship_city import City
@@ -10,20 +10,8 @@ from sqlalchemy.orm import relationship
 
 
 if __name__ == "__main__":
-    # Check the number of command-line arguments
-    if len(argv) != 4:
-        print(f"Usage: {argv[0]} <mysql_username> "
-              "<mysql_password> <mysql_db_name>")
-        exit(1)
-
-    # Get MySQL username, password, and database name from command-line args
-    mysql_username, mysql_password, mysql_db_name = argv[1:4]
-
-    # Create engine and session
-    db_url = ("mysql+mysqldb://{}:{}@localhost:3306/{}"
-              .format(mysql_username, mysql_password, mysql_db_name)
-              )
-    engine = create_engine(db_url)
+    engine = create_engine('mysql+mysqldb://{}:{}@localhost:3306/{}'
+                           .format(sys.argv[1], sys.argv[2], sys.argv[3]))
     Base.metadata.create_all(engine)
     Session = sessionmaker(bind=engine)
     session = Session()
