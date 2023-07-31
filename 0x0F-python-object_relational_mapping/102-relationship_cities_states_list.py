@@ -1,34 +1,35 @@
 #!/usr/bin/python3
 """
-Lists all City objects from the database hbtn_0e_101_usa
+Lists all City objects from the database hbtn_0e_101_usa along with their
+corresponding State names.
 """
-from sys import argv
+
+import sys
 from relationship_state import Base, State
 from relationship_city import City
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 
-if __name__ == "__main__":
-    # Check the number of command-line arguments
-    if len(argv) != 4:
-        print(f"Usage: {argv[0]} <mysql_username> "
-              "<mysql_password> <mysql_db_name>")
-        exit(1)
-
-    # Get MySQL username, password, and database name from command-line args
-    mysql_username, mysql_password, mysql_db_name = argv[1:4]
+if __name__ == '__main__':
+    # Connect to the MySQL server and database using provided credentials
+    mysql_username, mysql_password, mysql_db_name = sys.argv[1:4]
 
     # Create engine and session
     db_url = ("mysql+mysqldb://{}:{}@localhost:3306/{}"
-              .format(mysql_username, mysql_password, mysql_db_name)
+              .format(mysql_username, mysql_password, mysql_db_name),
+              pool_pre_ping=True
               )
-    engine = create_engine(db_url)
-    Base.metadata.create_all(engine)
 
-    # Use a context manager for the session
+    # Create a session to interact with the database
     Session = sessionmaker(bind=engine)
-    with Session() as session:
-        # Query for all City objects and their corresponding State names
-        for city in session.query(City).order_by(City.id):
-            print(f"{city.id}: {city.name} -> {city.state.name}")
+    session = Session()
+
+    # Retrieve all City objects along with their corresponding State objects,
+    # ordered by City id
+    states = session.query(State).join(City).order_by(City.id).all()
+
+    # Print City objects and their corresponding State names
+    for state in states:
+        for city in state.cities:
+            print("{}: {} -> {}".format(city.id, city.name, state.name))
